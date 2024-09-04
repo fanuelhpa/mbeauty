@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fandevv.mbeauty.entities.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -26,6 +27,8 @@ public class User implements Serializable{
 	private String email;
 	private String password;
 	
+	private Integer userType;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Scheduling> schedulings = new ArrayList<>();
@@ -33,12 +36,13 @@ public class User implements Serializable{
 	public User () {
 	}
 
-	public User(Integer id, String name, String email, String password) {
+	public User(Integer id, String name, String email, String password, UserType userType) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		setUserType(userType);
 	}
 
 	public Integer getId() {
@@ -71,6 +75,17 @@ public class User implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public UserType getUserType() {
+		return UserType.valueOf(userType);
+	}
+
+	public void setUserType(UserType userType) {
+		
+		if(userType != null) {
+			this.userType = userType.getCode();
+		}
 	}
 	
 	public List<Scheduling> getSchedulings() {

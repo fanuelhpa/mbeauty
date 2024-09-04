@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.fandevv.mbeauty.entities.Scheduling;
 import com.fandevv.mbeauty.entities.User;
+import com.fandevv.mbeauty.entities.enums.UserType;
 import com.fandevv.mbeauty.repositories.SchedulingRepository;
 import com.fandevv.mbeauty.repositories.UserRepository;
 
@@ -26,8 +27,8 @@ public class TestConfiguration implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		User user1 = new User(null, "Fani Pereira", "fanuel@gmail.com", "12354235");
-		User user2 = new User(null, "Icô Santos", "ico@gmail.com", "9438945u02");
+		User user1 = new User(null, "Fani Pereira", "fanuel@gmail.com", "12354235", UserType.CLIENT);
+		User user2 = new User(null, "Icô Santos", "ico@gmail.com", "9438945u02", UserType.ADMINISTRATOR);
 		
 		userRepository.saveAll(Arrays.asList(user1, user2));
 		
