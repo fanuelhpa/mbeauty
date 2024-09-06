@@ -26,21 +26,28 @@ public class Scheduling implements Serializable{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant schedulingDate;
 	private Double price;
+	private Instant paymentDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@ManyToOne
+	@JoinColumn(name  = "service_id")
+	private Service service;
+		
 	public Scheduling() { 
 		
 	}
 
-	public Scheduling(Integer id, Instant schedulingDate, Double price, User user) {
+	public Scheduling(Integer id, Instant schedulingDate, Double price, Instant paymentDate, User user, Service service) {
 		super();
 		this.id = id;
 		this.schedulingDate = schedulingDate;
 		this.price = price;
+		this.paymentDate = paymentDate;
 		this.user = user;
+		this.service = service;
 	}
 
 	public Integer getId() {
@@ -67,12 +74,28 @@ public class Scheduling implements Serializable{
 		this.price = price;
 	}
 
+	public Instant getPaymentDate() {
+		return paymentDate;
+	}
+
+	public void setPaymentDate(Instant paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
 	}
 
 	@Override

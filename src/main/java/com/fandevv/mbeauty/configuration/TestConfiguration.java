@@ -9,9 +9,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.fandevv.mbeauty.entities.Scheduling;
+import com.fandevv.mbeauty.entities.Service;
 import com.fandevv.mbeauty.entities.User;
+import com.fandevv.mbeauty.entities.enums.ServiceType;
 import com.fandevv.mbeauty.entities.enums.UserType;
 import com.fandevv.mbeauty.repositories.SchedulingRepository;
+import com.fandevv.mbeauty.repositories.ServiceRepository;
 import com.fandevv.mbeauty.repositories.UserRepository;
 
 @Configuration
@@ -23,6 +26,9 @@ public class TestConfiguration implements CommandLineRunner{
 	
 	@Autowired
 	private SchedulingRepository schedulingRepository;
+	
+	@Autowired
+	private ServiceRepository serviceRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -32,9 +38,15 @@ public class TestConfiguration implements CommandLineRunner{
 		
 		userRepository.saveAll(Arrays.asList(user1, user2));
 		
-		Scheduling sch1 = new Scheduling(null, Instant.parse("2024-09-04T15:02:00Z"), 30.00, user1);
-		Scheduling sch2 = new Scheduling(null, Instant.parse("2024-09-14T18:32:00Z"), 20.00, user2);
-		Scheduling sch3 = new Scheduling(null, Instant.parse("2024-09-24T15:20:00Z"), 50.00, user1);
+		Service serv1 = new Service(null, "Escovinha", 30.0, ServiceType.HAIR);
+		Service serv2 = new Service(null, "Mão", 40.0, ServiceType.HAND);
+		Service serv3 = new Service(null, "Relaxamento", 80.0, ServiceType.HAIR);
+		
+		serviceRepository.saveAll(Arrays.asList(serv1, serv2, serv3));
+		
+		Scheduling sch1 = new Scheduling(null, Instant.parse("2024-09-04T15:02:00Z"), 30.00, Instant.parse("2024-09-15T15:02:00Z"), user1, serv1);
+		Scheduling sch2 = new Scheduling(null, Instant.parse("2024-09-14T18:32:00Z"), 20.00, null, user2, serv2);
+		Scheduling sch3 = new Scheduling(null, Instant.parse("2024-09-24T15:20:00Z"), 50.00, Instant.parse("2024-10-04T21:02:00Z"), user1, serv3);
 		
 		schedulingRepository.saveAll(Arrays.asList(sch1, sch2, sch3));
 	}
