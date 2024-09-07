@@ -8,11 +8,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.fandevv.mbeauty.entities.Phone;
 import com.fandevv.mbeauty.entities.Scheduling;
 import com.fandevv.mbeauty.entities.Service;
 import com.fandevv.mbeauty.entities.User;
 import com.fandevv.mbeauty.entities.enums.ServiceType;
 import com.fandevv.mbeauty.entities.enums.UserType;
+import com.fandevv.mbeauty.repositories.PhoneRepository;
 import com.fandevv.mbeauty.repositories.SchedulingRepository;
 import com.fandevv.mbeauty.repositories.ServiceRepository;
 import com.fandevv.mbeauty.repositories.UserRepository;
@@ -29,6 +31,9 @@ public class TestConfiguration implements CommandLineRunner{
 	
 	@Autowired
 	private ServiceRepository serviceRepository;
+	
+	@Autowired
+	private PhoneRepository phoneRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -37,6 +42,16 @@ public class TestConfiguration implements CommandLineRunner{
 		User user2 = new User(null, "Icô Santos", "ico@gmail.com", "9438945u02", UserType.ADMINISTRATOR);
 		
 		userRepository.saveAll(Arrays.asList(user1, user2));
+		
+		Phone phone1 = new Phone(null, "3193442-4578");
+		Phone phone2 = new Phone(null, "3193478-4523");
+		Phone phone3 = new Phone(null, "3193456-7865");
+		
+		phone1.setUser(user1);
+		phone2.setUser(user2);
+		phone3.setUser(user2);
+		
+		phoneRepository.saveAll(Arrays.asList(phone1, phone2, phone3));
 		
 		Service serv1 = new Service(null, "Escovinha", 30.0, ServiceType.HAIR);
 		Service serv2 = new Service(null, "Mão", 40.0, ServiceType.HAND);
