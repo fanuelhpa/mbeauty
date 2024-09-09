@@ -33,4 +33,11 @@ public class SchedulingResource {
 		return ResponseEntity.ok().body(scheduling);
 	}
 	
+	@GetMapping(value = "/range/{range}")
+	public ResponseEntity<List<Scheduling>> schedulingsPerRange(@PathVariable String range) {
+		
+		List<Scheduling> schedulings = schedulingService.findPerRange(range);
+		return ResponseEntity.ok().body(schedulings);
+	}
+
 }

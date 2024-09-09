@@ -26,6 +26,7 @@ public class Scheduling implements Serializable{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant schedulingDate;
 	private Double price;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant paymentDate;
 	
 	@ManyToOne
@@ -97,7 +98,7 @@ public class Scheduling implements Serializable{
 	public void setService(Service service) {
 		this.service = service;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
