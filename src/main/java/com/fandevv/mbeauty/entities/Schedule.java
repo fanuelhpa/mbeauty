@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_scheduling")
-public class Scheduling implements Serializable{
+public class Schedule implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -24,7 +24,7 @@ public class Scheduling implements Serializable{
 	private Integer id;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-	private Instant schedulingDate;
+	private Instant scheduleDate;
 	private Double price;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant paymentDate;
@@ -37,14 +37,14 @@ public class Scheduling implements Serializable{
 	@JoinColumn(name  = "service_id")
 	private Service service;
 		
-	public Scheduling() { 
+	public Schedule() { 
 		
 	}
 
-	public Scheduling(Integer id, Instant schedulingDate, Double price, Instant paymentDate, User user, Service service) {
+	public Schedule(Integer id, Instant scheduleDate, Double price, Instant paymentDate, User user, Service service) {
 		super();
 		this.id = id;
-		this.schedulingDate = schedulingDate;
+		this.scheduleDate = scheduleDate;
 		this.price = price;
 		this.paymentDate = paymentDate;
 		this.user = user;
@@ -59,12 +59,12 @@ public class Scheduling implements Serializable{
 		this.id = id;
 	}
 
-	public Instant getSchedulingDate() {
-		return schedulingDate;
+	public Instant getScheduleDate() {
+		return scheduleDate;
 	}
 
-	public void setSchedulingDate(Instant schedulingDate) {
-		this.schedulingDate = schedulingDate;
+	public void setScheduleDate(Instant scheduleDate) {
+		this.scheduleDate = scheduleDate;
 	}
 
 	public Double getPrice() {
@@ -112,7 +112,7 @@ public class Scheduling implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Scheduling other = (Scheduling) obj;
+		Schedule other = (Schedule) obj;
 		return Objects.equals(id, other.id);
 	}
 	

@@ -32,7 +32,7 @@ public class User implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
-	private List<Scheduling> schedulings = new ArrayList<>();
+	private List<Schedule> schedulings = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user")
 	private List<Phone> phones = new ArrayList<>();
@@ -92,7 +92,7 @@ public class User implements Serializable{
 		}
 	}
 	
-	public List<Scheduling> getSchedulings() {
+	public List<Schedule> getSchedulings() {
 		return schedulings;
 	}
 

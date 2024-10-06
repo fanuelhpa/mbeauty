@@ -29,7 +29,7 @@ public class Service implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "service")
-	private List<Scheduling> schedulings = new ArrayList<>();
+	private List<Schedule> schedules = new ArrayList<>();
 	
 	public Service() {
 		
@@ -79,8 +79,8 @@ public class Service implements Serializable{
 		
 	}
 
-	public List<Scheduling> getSchedulings() {
-		return schedulings;
+	public List<Schedule> getSchedules() {
+		return schedules;
 	}
 
 	@Override
