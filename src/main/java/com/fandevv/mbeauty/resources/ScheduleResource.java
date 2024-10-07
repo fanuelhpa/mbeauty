@@ -25,7 +25,10 @@ public class ScheduleResource {
 	public ResponseEntity<List<ScheduleDTO>> findAll() {
 		
 		List<Schedule> listSchedules = scheduleService.findAll();
+		
+		//Convert each schedule from listSchedules to scheduleDTO and make a list of this
 		List<ScheduleDTO> listSchedulesDTO = listSchedules.stream().map(x -> new ScheduleDTO(x)).collect(Collectors.toList());
+		
 		return ResponseEntity.ok().body(listSchedulesDTO);
 	}
 	

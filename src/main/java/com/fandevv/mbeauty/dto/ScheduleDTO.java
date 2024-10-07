@@ -1,7 +1,8 @@
 package com.fandevv.mbeauty.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.fandevv.mbeauty.entities.Schedule;
 
@@ -9,23 +10,29 @@ public class ScheduleDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	private Instant scheduleDate;
+	//private Instant scheduleDate;
+	private String date;
+	private String hour;
 	private Double price;
-	private UserDTO userDTO;
-	private ServiceDTO serviceDTO;
+	private UserDTO user;
+	private ServiceDTO service;
 	
 	public ScheduleDTO() {
 		
 	}
 	public ScheduleDTO(Schedule schedule) {
 		
+		SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdfHour = new SimpleDateFormat("HH:mm");
+		
 		id = schedule.getId();
-		scheduleDate = schedule.getScheduleDate();
+		date = sdfDate.format(Date.from(schedule.getScheduleDate()));
+		hour = sdfHour.format(Date.from(schedule.getScheduleDate()));
 		price = schedule.getPrice();
 		
 		//Create userDTO and serviceDTO based on user and service
-		userDTO = new UserDTO(schedule.getUser());
-		serviceDTO = new ServiceDTO(schedule.getService());
+		user = new UserDTO(schedule.getUser());
+		service = new ServiceDTO(schedule.getService());
 	}
 	
 	public Integer getId() {
@@ -34,11 +41,18 @@ public class ScheduleDTO implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Instant getScheduleDate() {
-		return scheduleDate;
+	
+	public String getDate() {
+		return date;
 	}
-	public void setScheduleDate(Instant scheduleDate) {
-		this.scheduleDate = scheduleDate;
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getHour() {
+		return hour;
+	}
+	public void setHour(String hour) {
+		this.hour = hour;
 	}
 	public Double getPrice() {
 		return price;
@@ -46,16 +60,16 @@ public class ScheduleDTO implements Serializable{
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public UserDTO getUserDTO() {
-		return userDTO;
+	public UserDTO getUser() {
+		return user;
 	}
 	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
+		this.user = userDTO;
 	}
-	public ServiceDTO getServiceDTO() {
-		return serviceDTO;
+	public ServiceDTO getService() {
+		return service;
 	}
-	public void setServiceDTO(ServiceDTO serviceDTO) {
-		this.serviceDTO = serviceDTO;
+	public void setService(ServiceDTO serviceDTO) {
+		this.service = serviceDTO;
 	}
 }

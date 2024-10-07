@@ -2,7 +2,6 @@ package com.fandevv.mbeauty.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,7 +31,7 @@ public class User implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
-	private List<Schedule> schedulings = new ArrayList<>();
+	private List<Schedule> schedules = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user")
 	private List<Phone> phones = new ArrayList<>();
@@ -92,8 +91,8 @@ public class User implements Serializable{
 		}
 	}
 	
-	public List<Schedule> getSchedulings() {
-		return schedulings;
+	public List<Schedule> getSchedules() {
+		return schedules;
 	}
 
 	public List<Phone> getPhones() {
