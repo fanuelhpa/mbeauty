@@ -2,9 +2,9 @@ package com.fandevv.mbeauty.entities.enums;
 
 public enum ServiceType {
 	
-	HAIR(1),
-	HAND(2),
-	FOOTANDHAND(3);
+	HAIR(0),
+	HAND(1),
+	FOOTANDHAND(2);
 	
 	private int code;
 	

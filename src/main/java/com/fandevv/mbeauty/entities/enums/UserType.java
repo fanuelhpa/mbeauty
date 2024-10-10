@@ -2,8 +2,8 @@ package com.fandevv.mbeauty.entities.enums;
 
 public enum UserType {
 	
-	ADMINISTRATOR(1),
-	CLIENT(2);
+	ADMINISTRATOR(0),
+	CLIENT(1);
 
 	private int code;
 	

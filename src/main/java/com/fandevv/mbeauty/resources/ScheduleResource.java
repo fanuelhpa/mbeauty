@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,6 +46,17 @@ public class ScheduleResource {
 		
 		List<Schedule> schedulings = scheduleService.findScheduleRange(range);
 		return ResponseEntity.ok().body(schedulings);
+	}
+	
+	//Send a schedule to data persistence and return a scheduleDTO
+	@PostMapping
+	public ResponseEntity<ScheduleDTO> insert(@RequestBody Schedule schedule){
+		
+		schedule = scheduleService.insert(schedule);
+		
+		ScheduleDTO returnedData = new ScheduleDTO(schedule);
+		
+		return ResponseEntity.ok().body(returnedData);
 	}
 
 }

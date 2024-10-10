@@ -4,6 +4,7 @@ package com.fandevv.mbeauty.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fandevv.mbeauty.entities.Service;
@@ -19,7 +20,6 @@ public class ServiceService {
 	public List<Service> findAll(){
 		
 		List<Service> services = serviceRepository.findAll();
-		
 		return services;
 	}
 	
@@ -27,6 +27,18 @@ public class ServiceService {
 		
 		Optional<Service> service = serviceRepository.findById(id);
 		
-		return service.orElse(null);
+		if (service == null) {
+			
+			throw new ObjectNotFoundException("Service not found", service);	
+		}
+		else {
+		
+			return service.get();
+		}
+	}
+	
+	public Service insert(Service service) {
+		
+		return serviceRepository.save(service);
 	}
 }

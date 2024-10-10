@@ -8,6 +8,7 @@ import java.util.Objects;
 import com.fandevv.mbeauty.entities.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,8 +25,11 @@ public class User implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	
+	//@Column(unique=true)
 	private String email;
 	private String password;
+	private String phone;
 	
 	private Integer userType;
 	
@@ -33,18 +37,18 @@ public class User implements Serializable{
 	@OneToMany(mappedBy = "user")
 	private List<Schedule> schedules = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "user")
-	private List<Phone> phones = new ArrayList<>();
 	
 	public User () {
 	}
 
-	public User(Integer id, String name, String email, String password, UserType userType) {
+	public User(Integer id, String name, String email, String password, String phone, UserType userType) {
 		super();
+		
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.phone = phone;
 		setUserType(userType);
 	}
 
@@ -80,6 +84,14 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public UserType getUserType() {
 		return UserType.valueOf(userType);
 	}
@@ -93,10 +105,6 @@ public class User implements Serializable{
 	
 	public List<Schedule> getSchedules() {
 		return schedules;
-	}
-
-	public List<Phone> getPhones() {
-		return phones;
 	}
 
 	@Override

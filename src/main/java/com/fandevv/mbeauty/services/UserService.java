@@ -3,6 +3,7 @@ package com.fandevv.mbeauty.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,18 @@ public class UserService {
 		
 		Optional<User> user = userRepository.findById(id);
 		
-		return user.orElse(null);
+		if (user == null) {
+			
+			throw new ObjectNotFoundException("User not found", user);	
+		}
+		else {
+		
+			return user.get();
+		}
+	}
+	
+	//Insert a User in database
+	public User insert(User user) {
+		return userRepository.save(user);
 	}
 }

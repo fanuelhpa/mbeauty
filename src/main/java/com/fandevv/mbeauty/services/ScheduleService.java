@@ -5,16 +5,23 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.fandevv.mbeauty.entities.Schedule;
+import com.fandevv.mbeauty.entities.Service;
+import com.fandevv.mbeauty.entities.User;
 import com.fandevv.mbeauty.repositories.ScheduleRepository;
 
-@Service
+@org.springframework.stereotype.Service
 public class ScheduleService {
 
 	@Autowired
 	private ScheduleRepository scheduleRepository;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private ServiceService serviceService;
 	
 	public List<Schedule> findAll(){
 		return scheduleRepository.findAll();
@@ -39,5 +46,17 @@ public class ScheduleService {
 			
 		return schedulings;		
 	}
+	
+	public Schedule insert(Schedule schedule) {
+		
+		User user = userService.findById(schedule.getUser().getId());
+		Service service = serviceService.findById(schedule.getService().getId());
+		
+		schedule.setUser(user);
+		schedule.setService(service);
+		
+		return scheduleRepository.save(schedule);
+	}
+	
 
 }
