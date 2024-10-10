@@ -41,4 +41,13 @@ public class UserResource {
 		return ResponseEntity.ok().body(user);
 	}
 	
+	@PostMapping
+	public ResponseEntity<UserDTO> insert(@RequestBody User user) {
+		
+		user = userService.insert(user);
+		UserDTO returned = new UserDTO(user);
+		
+		return ResponseEntity.ok().body(returned);
+		
+	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fandevv.mbeauty.dto.ServiceDTO;
 import com.fandevv.mbeauty.entities.Service;
 import com.fandevv.mbeauty.services.ServiceService;
 
@@ -35,5 +36,14 @@ public class ServiceResource {
 		Service service = serviceService.findById(id);
 		
 		return ResponseEntity.ok().body(service);
+	}
+	
+	@PostMapping
+	public ResponseEntity<ServiceDTO> insert(@RequestBody Service service){
+		
+		service = serviceService.insert(service);
+		ServiceDTO returned = new ServiceDTO(service);
+		
+		return ResponseEntity.ok().body(returned);
 	}
 }

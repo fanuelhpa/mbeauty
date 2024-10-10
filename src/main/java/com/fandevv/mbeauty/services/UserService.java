@@ -36,6 +36,7 @@ public class UserService {
 	
 	//Insert a User in database
 	public User insert(User user) {
+		
 		return userRepository.save(user);
 	}
 }

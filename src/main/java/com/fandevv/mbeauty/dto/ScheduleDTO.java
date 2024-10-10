@@ -22,7 +22,7 @@ public class ScheduleDTO implements Serializable{
 	}
 	public ScheduleDTO(Schedule schedule) {
 		
-		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat sdfHour = new SimpleDateFormat("HH:mm");
 		
 		id = schedule.getId();
@@ -31,7 +31,7 @@ public class ScheduleDTO implements Serializable{
 		date = sdfDate.format(Date.from(schedule.getScheduleDate()));
 		hour = sdfHour.format(Date.from(schedule.getScheduleDate()));
 		
-		price = schedule.getService().getPrice();
+		price = schedule.getPrice();
 		
 		//Create userDTO and serviceDTO based on user and service
 		user = new UserDTO(schedule.getUser());

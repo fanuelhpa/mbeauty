@@ -54,6 +54,7 @@ public class ScheduleService {
 		
 		schedule.setUser(user);
 		schedule.setService(service);
+		schedule.setPrice(service.getPrice());
 		
 		return scheduleRepository.save(schedule);
 	}
