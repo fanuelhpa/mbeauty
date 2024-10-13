@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,10 +54,15 @@ public class ScheduleResource {
 	public ResponseEntity<ScheduleDTO> insert(@RequestBody Schedule schedule){
 		
 		schedule = scheduleService.insert(schedule);
-		
 		ScheduleDTO returnedData = new ScheduleDTO(schedule);
-		
 		return ResponseEntity.ok().body(returnedData);
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
+		
+		scheduleService.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }

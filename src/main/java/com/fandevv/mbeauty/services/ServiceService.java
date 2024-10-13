@@ -37,6 +37,7 @@ public class ServiceService {
 		}
 	}
 	
+	//Insert a service into the database
 	public Service insert(Service service) {
 		
 		return serviceRepository.save(service);

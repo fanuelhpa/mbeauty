@@ -22,6 +22,8 @@ public class ServiceResource {
 	@Autowired
 	private ServiceService serviceService;
 	
+	
+	//Find all
 	@GetMapping
 	public ResponseEntity<List<Service>> findAll(){
 		
@@ -30,6 +32,7 @@ public class ServiceResource {
 		return ResponseEntity.ok().body(services);
 	}
 	
+	//Find by ID
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Service> findById(@PathVariable Integer id){
 		
@@ -38,6 +41,7 @@ public class ServiceResource {
 		return ResponseEntity.ok().body(service);
 	}
 	
+	//Insert
 	@PostMapping
 	public ResponseEntity<ServiceDTO> insert(@RequestBody Service service){
 		

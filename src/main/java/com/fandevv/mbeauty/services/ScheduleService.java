@@ -47,6 +47,7 @@ public class ScheduleService {
 		return schedulings;		
 	}
 	
+	//Insert a schedule in the database
 	public Schedule insert(Schedule schedule) {
 		
 		User user = userService.findById(schedule.getUser().getId());
@@ -59,5 +60,9 @@ public class ScheduleService {
 		return scheduleRepository.save(schedule);
 	}
 	
+	//Delete a schedule off database
+	public void delete(Integer id) {
+		scheduleRepository.deleteById(id);
+	}
 
 }
